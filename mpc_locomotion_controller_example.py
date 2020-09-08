@@ -137,8 +137,11 @@ def _run_example(max_time=_MAX_TIME_SECONDS):
     
   
   random.seed(10)
-  #p.configureDebugVisualizer(p.COV_ENABLE_RENDERING,0)
-  p.configureDebugVisualizer( shadowMapResolution=16384)
+  p.configureDebugVisualizer(p.COV_ENABLE_RENDERING,0)
+  
+  #some GPUs become really slow, but a decent discrete GPU can handle
+  #makes shadows less jaggy
+  #p.configureDebugVisualizer( shadowMapResolution=16384)
   
   heightPerturbationRange = 0.06
   ground_id = -1
@@ -177,6 +180,8 @@ def _run_example(max_time=_MAX_TIME_SECONDS):
           "laikago/laikago_toes_zup.urdf", [-10, -15, 0.52])
   
   robot = laikago_sim.SimpleRobot(p, robot_uid)
+  
+  p.configureDebugVisualizer(p.COV_ENABLE_RENDERING,1)
   
   controller = _setup_controller(robot)
   controller.reset()
